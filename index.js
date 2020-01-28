@@ -4,7 +4,7 @@ const app = express()
 const port = 3000
 const bodyParser = require('body-parser')
 const config = require('./config/index')
-// const seederService = require('./services/seeder.service');
+const seederService = require('./services/seeder.service');
 
 mongoose.connect(config.dbConnection, { useNewUrlParser: true, useUnifiedTopology: true})
 
@@ -24,7 +24,7 @@ app.use(corsConfig);
 // app.use('/api', apiRoutes);
 
 if (config.seedData) {
-    // seederService.seedData()
+    seederService.seedData()
 }
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
