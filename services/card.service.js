@@ -25,9 +25,27 @@ module.exports = {
       })
     })
   },
+  deleteTask(req, res) {
+    Card.deleteOne({ _id: req.params.cardId }, function(err) {
+      if (err) {
+        this._handleResponse(err, null, res)
+      }
+
+      List.updateOne(
+        { _id: req.params.listId },
+        { $pull: { cards: req.params.cardId } }
+      ).exec(function(err, data) {
+        if (err) {
+          res.status(400).send(err.message)
+        } else {
+          res.send(data)
+        }
+      })
+    })
+  },
   _handleResponse(err, data, res) {
     if (err) {
-      res.status(400).end()
+      res.status(400).end(err.message)
     } else {
       res.send(data)
     }

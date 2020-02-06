@@ -13,5 +13,9 @@ router.put(
 router.put('/boards/:boardId', boardService.update.bind(boardService))
 router.post('/lists', listService.create.bind(listService))
 router.post('/list/task', cardService.createTask.bind(cardService))
+router.delete(
+  '/lists/:listId/:cardId',
+  cardService.deleteTask.bind(cardService)
+)
 
 module.exports = router
