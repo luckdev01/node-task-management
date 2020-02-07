@@ -4,9 +4,10 @@ const app = express()
 const port = 3000
 const bodyParser = require('body-parser')
 const config = require('./config/index')
+const database = require('./config/database')
 const seederService = require('./services/seeder.service')
 
-mongoose.connect(config.dbConnection, {
+mongoose.connect(database.remoteUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
